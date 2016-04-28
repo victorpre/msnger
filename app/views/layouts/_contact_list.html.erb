@@ -1,0 +1,32 @@
+<ul class="collection with-header z-depth-3">
+  <li class="collection-header"><h4>Contacts</h4></li>
+  <li>
+    <div class="row">
+        <div class="input-field col s12">
+          <i class="material-icons prefix">search</i>
+          <input id="icon_prefix" type="text" class="validate">
+          <label for="icon_prefix">Username</label>
+        </div>
+    </div>
+  </li>
+ <% @users.each_with_index do |user, index| %>
+ <% @conversation = user.conversations.between(user.id,current_user.id).first%>
+ <% @unread_msg_count = @conversation.unread_msg_count(current_user.id)%>
+  <!-- <a href="#!" class="collection-item start-conversation" data-sid=<%= current_user.id%> data-rip=<%=user.id %>><%= index +=1 %> - <%= user.name %></a> -->
+    <li class="collection-item avatar">
+      <%= subscribe_to "/conversations/notify/#{@conversation.id}/#{current_user.id}"%>
+      <a href="#!" class=" start-conversation col s12" data-sid=<%= current_user.id%> data-rip=<%=user.id %>>
+      <i class="material-icons circle red">face</i>
+      <span class="title"><%= user.name+" "+user.last_name %></span>
+      <p><%= user.username %></p>
+
+      
+      <span class="new badge secondary-content" style="display: none;" id="<%=@conversation.id%>-msg-count"><%= @unread_msg_count%></span>
+      
+      </a>
+
+    </li>
+  <% end %>
+  </ul>
+
+

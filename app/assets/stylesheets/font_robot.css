@@ -1,0 +1,30 @@
+@font-face {
+  font-family: "Roboto";
+  src: local(Roboto Thin), url(/assets/roboto/Roboto-Thin-ec8252b3a3f3a07433ad90409b707abd59b88f74dae0878ea97dd4d5357ea5ae.eot);
+  src: url(/assets/roboto/Roboto-Thin-ec8252b3a3f3a07433ad90409b707abd59b88f74dae0878ea97dd4d5357ea5ae.eot?#iefix) format("embedded-opentype"), url(/assets/roboto/Roboto-Thin-fbcf22e622baa9226f9f2dcd2ce4975c9babc01a52eaf9397557a97cdebd7e40.woff2) format("woff2"), url(/assets/roboto/Roboto-Thin-ae65b047fa4032f18a40480a93d1aae6707a756e7b3bb5f060467cd1f59b1625.woff) format("woff"), url(/assets/roboto/Roboto-Thin-db1d464343bf795307bc90da83d65b93c841fb20f38662f92f1e5e2c5a1d2ec5.ttf) format("truetype");
+  font-weight: 200;
+}
+@font-face {
+  font-family: "Roboto";
+  src: local(Roboto Light), url(/assets/roboto/Roboto-Light-2517b97e2c0e1e6c8ceb9dd007015f897926bc504154137281eec4c1a9f9bdc9.eot);
+  src: url(/assets/roboto/Roboto-Light-2517b97e2c0e1e6c8ceb9dd007015f897926bc504154137281eec4c1a9f9bdc9.eot?#iefix) format("embedded-opentype"), url(/assets/roboto/Roboto-Light-94a0ac8d73bb60a9cbe27a4fa36669104f6ffa37c8ff2df29313a6c0d3b64a75.woff2) format("woff2"), url(/assets/roboto/Roboto-Light-2cbb012f1d36c09d3f17100ef2cf8213cbd429d9e519dff536c12ed6f07a0d25.woff) format("woff"), url(/assets/roboto/Roboto-Light-ee4352049603e5960550f55444ad720d8d4ce322c0dcba1afc77de78c430d0d5.ttf) format("truetype");
+  font-weight: 300;
+}
+@font-face {
+  font-family: "Roboto";
+  src: local(Roboto Regular), url(/assets/roboto/Roboto-Regular-cbb656ad18b9fa7d67c2d6e67372be1bc5924f9ad9a708619a31597de23ce8c0.eot);
+  src: url(/assets/roboto/Roboto-Regular-cbb656ad18b9fa7d67c2d6e67372be1bc5924f9ad9a708619a31597de23ce8c0.eot?#iefix) format("embedded-opentype"), url(/assets/roboto/Roboto-Regular-b5c9c23bd12593523a46d79dd0aee80e3226bbde4c9ac05fc30a95e2c1510de0.woff2) format("woff2"), url(/assets/roboto/Roboto-Regular-2cd6b07b7855716761250290ce3cf447ccc98e793e484294d3fa8ccbb55b016a.woff) format("woff"), url(/assets/roboto/Roboto-Regular-bde8a188e37aa936b167aecc5e5a3da40262f6e51fd54c584f2cf2b6b99d96ca.ttf) format("truetype");
+  font-weight: 400;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url(/assets/roboto/Roboto-Medium-714646396932c3ed852f6946b0149ad7fe3eaca63eb0f507abd4742afa3f1ac1.eot);
+  src: url(/assets/roboto/Roboto-Medium-714646396932c3ed852f6946b0149ad7fe3eaca63eb0f507abd4742afa3f1ac1.eot?#iefix) format("embedded-opentype"), url(/assets/roboto/Roboto-Medium-1cd5c4b37938d932110ec043ce1cc766d18cacf7a4e7cffa6a539855d5bdc08d.woff2) format("woff2"), url(/assets/roboto/Roboto-Medium-72841a4c4171b13ab1edf2c8f8046f0958f2ff608ce4e0d568dd5c6319f8a933.woff) format("woff"), url(/assets/roboto/Roboto-Medium-6e2ec5c5f89e4ce302bb93b46cb7cc336236501de17348e284878914c5e0e723.ttf) format("truetype");
+  font-weight: 500;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url(/assets/roboto/Roboto-Bold-a2ca27e10e7111ca13d7b9368c4b55a165ebf24b40ac16ec715cd3881204bb3a.eot);
+  src: url(/assets/roboto/Roboto-Bold-a2ca27e10e7111ca13d7b9368c4b55a165ebf24b40ac16ec715cd3881204bb3a.eot?#iefix) format("embedded-opentype"), url(/assets/roboto/Roboto-Bold-8b84b2abc336ee61f48a28a697b6ace2333ea5f1868aa15d5aeb2c7beac6d716.woff2) format("woff2"), url(/assets/roboto/Roboto-Bold-e7cbaf29c3812b80577cb845b5d359486242338f25620ba65260e265464fe359.woff) format("woff"), url(/assets/roboto/Roboto-Bold-594d74a49e307be7cc9e1ee5f1023684e6820cf11bcc968bee590391e1ad5a5a.ttf) format("truetype");
+  font-weight: 700;
+}

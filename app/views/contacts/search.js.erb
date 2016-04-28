@@ -1,0 +1,36 @@
+  $(document).ready(function(){
+    // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+
+    $('.modal-trigger').leanModal({
+        dismissible: true, // Modal can be dismissed by clicking outside of the modal
+        opacity: .5, // Opacity of modal background
+        in_duration: 300, // Transition in duration
+        out_duration: 200, // Transition out duration
+        ready: function() { alert('Ready'); }, // Callback for Modal open
+        complete: function() { alert('Closed'); } // Callback for Modal close
+      }
+    );
+
+    "<%if (@contact_found) && !(@contact_found.is_contact_of current_user) %>"
+      $("#modal-contact-found").find(".modal-content").find("#modal-contact-title").text("Add <%= @contact_found.name %> <%= @contact_found.last_name %> as your contact?");
+      $("#modal-contact-found").find(".modal-content").find("#add-modal-description").text("Do you want to add <%= @contact_found.name %> as your contact?");
+      $("#modal-contact-found").find(".modal-content").find("#add-modal-description").append("<form id='add-user-action' action='/add' method='post' data-remote='true'>"+
+        "<input id='add-id' name='add-id' value=<%= @contact_found.id%> type='hidden'>"+
+        "</form>");
+      $('#modal-contact-found').openModal();
+    "<%end%>"
+
+    "<% if (@contact_found) && (@contact_found.is_contact_of current_user)%>"
+      $("#modal-already-contact").find(".modal-content").find("#modal-contact-title").text("<%= @contact_found.name %> <%= @contact_found.last_name %> is already your contact.");
+      $("#modal-already-contact").find(".modal-content").find("#add-modal-description").text("You cannot add <%= @contact_found.name %> because this user is already your contact.");
+      $('#modal-already-contact').openModal();
+    "<%end%>"
+
+    "<% if !@contact_found %>"
+      $("#modal-notfound").find(".modal-content").find("#modal-contact-title").text("<%= @search_string %> is not a valid username.");
+      $("#modal-notfound").find(".modal-content").find("#add-modal-description").text("You cannot add <%= @search_string %> because there is not a user with this username.");
+      $('#modal-notfound').openModal();
+    "<%end%>"
+
+    $("#search").val("");
+  });

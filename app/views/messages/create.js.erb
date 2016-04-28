@@ -1,0 +1,32 @@
+<% publish_to @path_sender do %>
+  var id = "<%= @conversation.id %>";
+  var chatbox = $("#chatbox_" + id + " .chatboxcontent");
+  var sender_id = "<%= @message.sender_id %>";
+  var receiver_id = "<%= @message.recipient_id %>"//$('meta[name=user-id]').attr("content");
+
+  chatbox.append("<%= j render( partial: @message ) %>");
+  chatbox.scrollTop(chatbox[0].scrollHeight);
+  
+      // chatbox.children().last().removeClass("self").addClass("other");
+  chatBox.chatWith(id);
+      
+    // chatbox.scrollTop(chatbox[0].scrollHeight);
+    
+<% end %>
+
+
+<% publish_to @path_recipient do %>    
+  var id = "<%= @conversation.id %>";
+  var chatbox = $("#chatbox_" + id + " .chatboxcontent");
+  var sender_id = "<%= @message.sender_id %>";
+  var receiver_id = "<%= @message.recipient_id %>"//$('meta[name=user-id]').attr("content");
+
+  chatbox.append("<%= j render( partial: @message ) %>");
+  chatbox.scrollTop(chatbox[0].scrollHeight);
+  chatbox.children().last().removeClass("self").addClass("other");    
+  chatbox.scrollTop(chatbox[0].scrollHeight);
+  chatBox.notify();            
+<% end %>
+
+
+// duas respoastas separadas

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta content='<%= user_signed_in? ? current_user.id : "" %>' name='user-id'/>
+
+    <title>MSNger</title>
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+
+    <!-- shiv here -->
+
+  </head>
+
+  <body>
+    <header>
+      <%= render 'layouts/nav' %>
+    </header>
+    <main>
+      <div class="row">
+        <div id="modal-contact-found" class="modal">
+          <div class="modal-content">
+            <h4 id="modal-contact-title"></h4>
+            <p id="add-modal-description"></p>
+          </div>
+          <div class="modal-footer">
+            <a id="modal-cancel-button" href="#!" class="modal-action modal-close waves-effect waves-red btn-flat ">Cancel</a>
+            <a id="modal-accept-button" href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Add</a>
+          </div>
+        </div>
+
+        <div id="modal-already-contact" class="modal">
+          <div class="modal-content">
+            <h4 id="modal-contact-title"></h4>
+            <p id="add-modal-description"></p>
+          </div>
+          <div class="modal-footer">
+            <a id="modal-cancel-button" href="#!" class="modal-action modal-close waves-effect waves-red btn-flat ">Close</a>
+          </div>
+        </div>
+
+
+        <div id="modal-notfound" class="modal">
+          <div class="modal-content">
+            <h4 id="modal-contact-title"></h4>
+            <p id="add-modal-description"></p>
+          </div>
+          <div class="modal-footer">
+            <a id="modal-cancel-button" href="#!" class="modal-action modal-close waves-effect waves-red btn-flat ">Close</a>
+          </div>
+        </div>
+
+        <!-- <div class="container"> -->
+          <!-- flash messages here -->
+        <%if user_signed_in?%>
+          <div class="col s12 m4 l3">
+            <%= render 'layouts/contact_list' %>
+          </div>
+        <%end%>
+        <div class="col s12 m8 l9"> <!-- Note that "m8 l9" was added -->
+          <%= yield %>
+        </div>
+          
+        <!-- </div> -->
+        <audio id="chatAudio"><source src="/sounds/notification.mp3" type="audio/mpeg"></audio>
+      </div>
+    </main>
+    <footer class="page-footer">
+      
+      <div class="footer-copyright">
+        <div class="container">
+        © 2016 Victor Presumido
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

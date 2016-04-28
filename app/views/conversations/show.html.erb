@@ -1,0 +1,30 @@
+<div class="chatboxhead">
+  <div class="chatboxtitle">
+    <i class="fa fa-comments"></i>
+
+    <h1><%= @receiver.name %> </h1>
+  </div>
+  <div class="chatboxoptions">
+    <%= link_to "<i class='material-icons'>chat_bubble_outline</i> ".html_safe, "#", class: "toggleChatBox", "data-cid" => @conversation.id %>
+    &nbsp;&nbsp;
+    <%= link_to "<i class='material-icons'>clear</i> ".html_safe, "#", class: "closeChat", "data-cid" => @conversation.id %>
+  </div>
+  <br clear="all"/>
+</div>
+<div class="chatboxcontent">
+  <% if @messages.any? %>
+      <%= render @messages %>
+  <% end %>
+</div>
+<div class="chatboxinput">
+  <%= form_for([@conversation, @message], :remote => true, :html => {id: "conversation_form_#{@conversation.id}"}) do |f| %>
+      <%= f.text_area :body, class: "chatboxtextarea", "data-cid" => @conversation.id %>
+  <div class="actions">
+    <button class="btn waves-effect waves-light submitMsg" type="submit" name="action">Send
+      <i class="material-icons right">send</i>
+    </button>
+  </div>    
+  <% end %>
+</div>
+
+<%= subscribe_to conversation_path(@conversation)+"/#{current_user.id}" %>
