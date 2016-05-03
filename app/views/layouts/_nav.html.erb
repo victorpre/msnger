@@ -14,40 +14,42 @@
           </li>
           <% if current_user.pending_contacts? %>
             <ul id="dropdown1" class="dropdown-content z-depth-4">
-              <% current_user.user_pending_contact_list.each do |user|%>
+              <% current_user.user_pending_contact_hash.each do |contact_id,user_ids|%>
+              <% user = User.find(user_ids[0]) %>
                 <!-- right --><!-- <li><a id="contact-pending-<%=user.id%>" href="#!"><%=user.name+" "+user.last_name%></a></li> -->
                 <ul class="collapsible collapsible-accordion">
                   <li>
                     <a class="collapsible-header"><%=user.name+" "+user.last_name%></a>
                     <div class="collapsible-body">
                       <ul>
-                        <div class="col s6"><li><a id="accept-contact-pending-<%=user.id%>" href="#!">Accept</a></li></div>
-                        <div class="col s6"><li><a id="decline-contact-pending-<%=user.id%>" class="waves-effect waves-red" href="#!">Decline</a></li></div>
+                        <form id='handle-contact-request' action='contacts-request/handle' method="post" data-remote="true">
+                          <div class="col s6"><li><a id="accept-contact-pending" href="#!">Accept</a></li></div>
+                          <div class="col s6"><li><a id="decline-contact-pending" class="waves-effect waves-red" href="#!">Decline</a></li></div>
+                          <input id="contact-id" name="contact-id" value="<%= contact_id %>" type="hidden">
+                        </form>
                       </ul>
                     </div>
                   </li>
                 </ul>
-
                 <li class="divider"></li>
               <%end%>
             </ul>
 
-
-            <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Pending requests<span class="new badge">
+            <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Pending requests
+              <span class="new badge">
                 <%= current_user.pending_contacts_count %>
-              </span><i class="material-icons right">arrow_drop_down</i></a></li>
-
-
+              </span><i class="material-icons right">arrow_drop_down</i></a>
+            </li>
           <%end%>
           <li>
             <form id="search-user-form" action="/search" method="post" data-remote="true">
-            <div class="input-field">
-              <input id="search" name="search" placeholder="Search contacts" type="search" required>
-              <label for="search"><i class="material-icons">search</i></label>
-              <i class="material-icons">close</i>
-            </div>
-          </form>
-        </li>
+              <div class="input-field">
+                <input id="search" name="search" placeholder="Search contacts" type="search" required>
+                <label for="search"><i class="material-icons">search</i></label>
+                <i class="material-icons">close</i>
+              </div>
+            </form>
+          </li>
           <li id="logout-button">
             <%= link_to "Logout", destroy_user_session_path, method: :delete    %>
           </li>

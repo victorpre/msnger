@@ -5,6 +5,15 @@ $(document).ready(function(){
     $("#modal-contact-found").find(".modal-content").find("#add-modal-description").find("#add-user-action").submit();
   });
 
+  $("#handle-contact-request").find("#accept-contact-pending").click(function(){
+    $("#handle-contact-request").append("<input id='accept' name='accept' value=true type='hidden'>");
+    $("#handle-contact-request").submit();
+  });
+
+  $("#handle-contact-request").find("#decline-contact-pending").click(function(){
+    $("#handle-contact-request").append("<input id='accept' name='accept' value=false type='hidden'>");
+    $("#handle-contact-request").submit();
+  });
 
   $('.dropdown-button').dropdown({
       inDuration: 300,

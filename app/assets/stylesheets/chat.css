@@ -8,6 +8,14 @@
     cursor: pointer;
 }
 
+ nav form {
+  height: inherit !important;
+ }
+ 
+ nav .input-field input { 
+   height: inherit !important;
+ }
+
 body {
     display: flex;
     min-height: 100vh;

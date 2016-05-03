@@ -24,6 +24,8 @@ Rails.application.routes.draw do
   post 'search' => 'contacts#search', defaults: { format: 'js' }
   post 'add' => 'contacts#add', defaults: { format: 'js' }
 
+  post 'contacts-request/handle' => 'contacts#handle'
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

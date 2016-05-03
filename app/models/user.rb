@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
          
    has_many :conversations, :foreign_key => :sender_id
-   has_many :contacts, :foreign_key => :owner_id
+   has_many :contacts, :foreign_key => :owner_id,  dependent: :destroy
 
    # lets see
    validates :email, uniqueness: true
@@ -42,7 +42,7 @@ class User < ActiveRecord::Base
   end
 
   def pending_contacts
-   contacts.where(request: :pending)
+   contacts.where("request=? AND user_id=?", :pending, self.id)
   end
 
   def pending_contacts?
@@ -55,6 +55,15 @@ class User < ActiveRecord::Base
 
    def user_pending_contact_list
      User.where(id: self.pending_contacts_ids)
+   end
+
+   def user_pending_contact_hash
+     hash = {}
+     pending_contacts.each do |contact_obj|
+      contact = Contact.find(contact_obj.id)
+      hash[contact.id] = [contact.owner_id,contact.user_id]
+     end
+     hash
    end
 
    def conversations
