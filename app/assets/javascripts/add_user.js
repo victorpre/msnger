@@ -1,8 +1,9 @@
 $(document).ready(function(){
   
   // Make contact request
-  $("#modal-contact-found").find(".modal-footer").find("#modal-accept-button").click(function(){
-    $("#modal-contact-found").find(".modal-content").find("#add-modal-description").find("#add-user-action").submit();
+  var modal_contact_found = $("#modal-contact-found");
+  modal_contact_found.find("#modal-accept-button").click(function(){
+    modal_contact_found.find("#add-user-action").submit();
   });
 
   $("#handle-contact-request").find("#accept-contact-pending").click(function(){

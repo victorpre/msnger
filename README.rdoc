@@ -2,4 +2,6 @@
 
 This is a common chat Application using RoR with http://materializecss.com/
 
+* To start up the Rack server: `rackup private_pub.ru -s thin -E production`
+
 
