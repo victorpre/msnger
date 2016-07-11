@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
    validates :username, uniqueness: true
 
   def is_contact_of user
-     (Contact.where(owner_id: self.id, user_id: user.id).size > 0 || Contact.where(owner_id:user.id , user_id: self.id).size > 0) || self.id == user.id
+     (self.approved_contacts.where(owner_id: self.id, user_id: user.id).size > 0 || self.approved_contacts.where(owner_id:user.id , user_id: self.id).size > 0) || self.id == user.id
    end
 
   def contacts_ids
@@ -38,7 +38,7 @@ class User < ActiveRecord::Base
   end
 
   def approved_contacts
-    contacts.where.not(request: :pending)
+    contacts.where(request: :approved)
   end
 
   def pending_contacts
@@ -57,16 +57,25 @@ class User < ActiveRecord::Base
      User.where(id: self.pending_contacts_ids)
    end
 
-   def user_pending_contact_hash
-     hash = {}
-     pending_contacts.each do |contact_obj|
+  def user_pending_contact_hash
+    hash = {}
+    pending_contacts.each do |contact_obj|
       contact = Contact.find(contact_obj.id)
       hash[contact.id] = [contact.owner_id,contact.user_id]
-     end
-     hash
-   end
+    end
+    hash
+  end
 
-   def conversations
-     Conversation.where("user1_id =? OR user2_id=?",self.id,self.id)
-   end
+  def has_declined_request? user
+    declined_requests = contacts.where("(user_id=? OR owner_id=?) AND request=?",user.id, user.id, :declined)
+    if declined_requests.size > 0
+      declined_requests.first
+    else
+      nil
+    end
+  end
+
+ def conversations
+   Conversation.where("user1_id =? OR user2_id=?",self.id,self.id)
+ end
 end

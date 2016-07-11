@@ -18,8 +18,14 @@ class ContactsController < ApplicationController
   def add
     new_contact_user = User.find(params["add-id"].to_i)
     if(new_contact_user)
-      contact = Contact.new({"owner_id" => current_user.id,"user_id" => new_contact_user.id})
-      contact.save
+      if(current_user.has_declined_request? new_contact_user)
+        binding.pry
+        contact = current_user.has_declined_request? new_contact_user
+        contact.request = "pending"
+      else  
+        contact = Contact.new({"owner_id" => current_user.id,"user_id" => new_contact_user.id})
+      end
+        contact.save
 
       # Contact save but its pending
       render :nothing => true
@@ -28,14 +34,17 @@ class ContactsController < ApplicationController
 
   def handle
     request_response = to_boolean(params[:accept])
-    
+
     if request_response
       @contact = Contact.find(params["contact_id"].to_i)
       @contact.request = "approved"
       @contact.save!
+    else
+      @contact = Contact.find(params["contact_id"].to_i)
+      @contact.request = "declined"
+      @contact.save!
     end
     render :nothing => true
-
   end
 
   private

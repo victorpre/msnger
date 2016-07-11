@@ -11,26 +11,27 @@
       }
     );
 
-    "<%if (@contact_found) && !(@contact_found.is_contact_of current_user) %>"
-      $("#modal-contact-found").find(".modal-content").find("#modal-contact-title").text("Add <%= @contact_found.name %> <%= @contact_found.last_name %> as your contact?");
-      $("#modal-contact-found").find(".modal-content").find("#add-modal-description").text("Do you want to add <%= @contact_found.name %> as your contact?");
-      $("#modal-contact-found").find(".modal-content").find("#add-modal-description").append("<form id='add-user-action' action='/add' method='post' data-remote='true'>"+
-        "<input id='add-id' name='add-id' value=<%= @contact_found.id%> type='hidden'>"+
-        "</form>");
-      $('#modal-contact-found').openModal();
-    "<%end%>"
+    "<%if (@contact_found) %>"
+      "<%if !(@contact_found.is_contact_of current_user) %>"
+        $("#modal-contact-found").find(".modal-content").find("#modal-contact-title").text("Add <%= @contact_found.name %> <%= @contact_found.last_name %> as your contact?");
+        $("#modal-contact-found").find(".modal-content").find("#add-modal-description").text("Do you want to add <%= @contact_found.name %> as your contact?");
+        $("#modal-contact-found").find(".modal-content").find("#add-modal-description").append("<form id='add-user-action' action='/add' method='post' data-remote='true'>"+
+          "<input id='add-id' name='add-id' value=<%= @contact_found.id%> type='hidden'>"+
+          "</form>");
+        $('#modal-contact-found').openModal();
+      
 
-    "<% if (@contact_found) && (@contact_found.is_contact_of current_user)%>"
-      $("#modal-already-contact").find(".modal-content").find("#modal-contact-title").text("<%= @contact_found.name %> <%= @contact_found.last_name %> is already your contact.");
-      $("#modal-already-contact").find(".modal-content").find("#add-modal-description").text("You cannot add <%= @contact_found.name %> because this user is already your contact.");
-      $('#modal-already-contact').openModal();
-    "<%end%>"
+      "<% elsif (@contact_found.is_contact_of current_user)%>"
+        $("#modal-already-contact").find(".modal-content").find("#modal-contact-title").text("<%= @contact_found.name %> <%= @contact_found.last_name %> is already your contact.");
+        $("#modal-already-contact").find(".modal-content").find("#add-modal-description").text("You cannot add <%= @contact_found.name %> because this user is already your contact.");
+        $('#modal-already-contact').openModal();
+      
 
-    "<% if !@contact_found %>"
-      $("#modal-notfound").find(".modal-content").find("#modal-contact-title").text("<%= @search_string %> is not a valid username.");
-      $("#modal-notfound").find(".modal-content").find("#add-modal-description").text("You cannot add <%= @search_string %> because there is not a user with this username.");
-      $('#modal-notfound').openModal();
+      "<% elsif !@contact_found %>"
+        $("#modal-notfound").find(".modal-content").find("#modal-contact-title").text("<%= @search_string %> is not a valid username.");
+        $("#modal-notfound").find(".modal-content").find("#add-modal-description").text("You cannot add <%= @search_string %> because there is not a user with this username.");
+        $('#modal-notfound').openModal();
+      "<%end%>"
     "<%end%>"
-
     $("#search").val("");
   });
